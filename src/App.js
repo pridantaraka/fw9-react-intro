@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import { Row } from "react-bootstrap";
+import { Col,Row } from "react-bootstrap";
 
-function App() {
+const App = () =>{
+  const [add,Hasil] = React.useState(0)
+React.useEffect(()=>{
+    console.log(add);
+  }, [add])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Row className="">
+      <Col className="d-flex col-12 justify-content-betwen">
+      <Col className="d-flex align-self-center"><button onClick={()=>Hasil(add-1)}>Kurang</button></Col>
+      <Col className="d-flex align-self-center"><h1>{add}</h1></Col>
+      <Col className="d-flex align-self-center"><button onClick={()=>Hasil(add+1)}>Tambah</button></Col>
+      </Col>
+    </Row>
+    </>
+)
 }
 
-export default App;
+// const App = ()=> {
+//   // const [isShowed, toggleShow] =React.useState(true)
+//   return(
+//     <ol>
+//       {/* {isShowed && <Series name={{episode:5}}>Text</Series>} */}
+
+//       {/* <button onClick={()=>toggleShow(!isShowed)}></button> */}
+//     </ol>
+//   )
+// }
+
+export default App
