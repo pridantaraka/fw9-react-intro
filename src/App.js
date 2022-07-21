@@ -1,18 +1,41 @@
+import axios from "axios";
 import React from "react";
-import { Col,Row } from "react-bootstrap";
-import {Button} from "react-bootstrap";
+import { Component } from "react";
+import {Col,Row} from "react-bootstrap"
 
-const App = () =>{
-  const [add,hasil] = React.useState(0)
-  return (
-    <main className="min-vh-100 d-flex justify-content-center">
-      <Row>
-        <Col className="d-flex align-self-center"><Button disabled={add<1} onClick={()=>hasil(add-1)}>Kurang</Button></Col>
-        <Col className="d-flex align-self-center"><h1>{add}</h1></Col>
-        <Col className="d-flex align-self-center"><Button disabled={add>=10} onClick={()=>hasil(add+1)}>Tambah</Button></Col>
-      </Row>
-    </main>
-    
-)
+const api = axios.create({
+    baseURL: 'https://rickandmortyapi.com/api/character'
+})
+
+class App extends Component{
+  state = {
+    courses:[]
+  }
+
+  constructor(){
+    super();
+    api.get('/').then(res =>{
+      console.log(res.data.results)
+      this.setState({ courses: res.data.results })
+    })
+  }
+  render(){
+    return(
+      <main>
+        <Row>
+          {
+            this.state.courses.map(course =>
+              <Col className="m-5">
+              <section className="d-flex flex-direction-center gap-5">
+              <img src={course.image} alt="Pict"/>
+              </section>
+              <h5 className="text-center">{course.name}</h5>
+              </Col>
+            )}
+        </Row>
+      </main>
+    )
+  }
 }
+
 export default App
