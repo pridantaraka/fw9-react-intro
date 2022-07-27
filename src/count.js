@@ -2,7 +2,7 @@ import React from "react";
 import { Col,Row } from "react-bootstrap";
 import {Button} from "react-bootstrap";
 
-const App = () =>{
+const Count = () =>{
   const [add,hasil] = React.useState(0)
   return (
     <main className="min-vh-100 d-flex justify-content-center">
@@ -15,4 +15,4 @@ const App = () =>{
     
 )
 }
-export default App
+export default Count

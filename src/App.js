@@ -1,41 +1,30 @@
-import axios from "axios";
 import React from "react";
-import { Component } from "react";
-import {Col,Row} from "react-bootstrap"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-const api = axios.create({
-    baseURL: 'https://rickandmortyapi.com/api/character'
-})
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pagestest/Dashboard"
+import Landing from "./pagestest/Landing";
+import Login from "./pagestest/Login";
 
-class App extends Component{
-  state = {
-    courses:[]
-  }
-
-  constructor(){
-    super();
-    api.get('/').then(res =>{
-      console.log(res.data.results)
-      this.setState({ courses: res.data.results })
-    })
-  }
-  render(){
-    return(
-      <main>
-        <Row>
-          {
-            this.state.courses.map(course =>
-              <Col className="m-5">
-              <section className="d-flex flex-direction-center gap-5">
-              <img src={course.image} alt="Pict"/>
-              </section>
-              <h5 className="text-center">{course.name}</h5>
-              </Col>
-            )}
-        </Row>
-      </main>
-    )
-  }
+function App() {
+  React.useEffect(() => {}, []);
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/landing" element={<Landing />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
 
 export default App
